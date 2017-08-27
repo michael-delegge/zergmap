@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 	//Check for flags on the command line	
-	ma
+	
 	else
 	{
 		while((flag = getopt(argc, argv, "h:ar")) != -1)
