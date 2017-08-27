@@ -1,0 +1,56 @@
+Name: Michael DeLegge
+Date: 26 AUG 2017
+Current Module: Capstone 2 
+Project Name: zergmap
+
+Project Goals:
+	Write a program that, given the pcaps of network traffic involving the zerg, determine where the zerg are located on the battlefield. The program should find all zerg that can communicate through two paths and eliminate all other zergs. 
+
+Considerations:
+-You cannot eliminate more than half of all zergs. 
+-There will possibly be invalid information.
+-Varying number of zergs.
+-Communication distance between zergs.
+-GPS and health information.
+-Display zergs below a certain threshold. 
+-Process multiple pcap files. 
+
+Initial Design:
+	I planned to use the code I used from the last capstone project. For the most part, a lot of the decode.c code transfered well to this project, but I did end up changing a few things to fir this project and eliminating a lot of the unnecessary code. I modified the structs and created structs relevant to this project that the program uses. I also carried over all of my conversion functions from the last capstone and added two additional ones. 
+
+Data Flow:
+	The program begins by first checking that the correct number of files was provided on the command line. Then, the program checks the flags, and if the user passed the -h flag to give a minimum health for the zerg. After the checks have been made, the program will iterate through all of the pcaps provided and continue with zergmap.
+	For each pcap iteration, the program checks the length of each pcap and determines if the file provided on argv can be read. If one of the files is invalid, the program will exit. Each file header is read and checked for various information such as ipv4 or ipv6 and type of zerg packet.
+	If a gps packet was parsed, the program will start updating the gps information. get_zerg_id adds nodes and sets values for gps information. This is done for each gps packet. 
+	After all gps and status data has been updated into the list, the program creates a matrix and sets the values. From the matrix, a graph is built and printed. 
+
+Communication Protocol:
+	The program is used to decode zerg pcap files with a well-known format. 
+
+Potential Pitfalls:
+-What zerg to eliminate.
+-Unusual pcap format.
+-Memory allocation and leaks.
+-Keeping track of hp and gps.
+-Error handling.
+-Not reading pcaps properly.
+-Properly building and moving through the tree.
+	
+Test Plan:
+	User Test:
+	-There were plenty of test pcaps provided in class to test the program with. 
+	-Ensure one part of the program works before moving on to the next part.
+	-Using debug and test statements throughout the program.
+	-Passing known bad values to see how they are handled/ how it will interact with program.
+ 		
+	Test Cases:
+	-Passing no files.
+	-Passing bad files.
+	-Error handling.
+	-Run against valgrind for memory leaks.
+
+Conclusion:
+	This project was much more difficult than I thought it would be. It was nice to be able to bring over code from the previous capstone, but past that progress was slow. The results I get are inconsistent and not correct. I know there is a lot I can do to improve and I would like to come back to this project at a later time and definitely improve it.  
+
+
+
